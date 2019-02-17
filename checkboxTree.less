@@ -1,0 +1,210 @@
+@import "../../less/mixins.less";
+:local(.treeActionsPopover) {
+  .popover-content {
+    padding: 0;
+    min-width: 150px;
+    ul {
+      padding: 12px 0;
+      margin: 0;
+      list-style: none;
+      li {
+        line-height: 37px;
+        padding: 0 24px;
+        &:hover {
+          cursor: pointer;
+          background-color: var(--light-gray-4);
+        }
+
+        &.disabled {
+          color: #ccc;
+          opacity: 0.5;
+          cursor: not-allowed !important;
+        }
+      }
+    }
+  }
+}
+:local(.checkboxTree) {
+  width: 328px;
+  .heightCalc(100%,58px);
+  .tree-actions {
+    display: table;
+    background-color: var(--white-three);
+    border-bottom: 1px solid var(--white-two);
+
+    .tree-filter {
+      display: table-cell;
+      padding: 24px 12px 24px 40px;
+      line-height: 16px;
+
+      .icon-search {
+        position: absolute;
+        color: var(--black);
+      }
+
+      .icon-delete {
+        position: absolute;
+        color: var(--black);
+      }
+
+      input {
+        font-size: 12px;
+        width: 100%;
+        border: none;
+        background-color: var(--white-three);
+        line-height: 16px;
+        padding: 0 0 0 24px;
+        font-weight: 300;
+      }
+    }
+
+    .add-button {
+      display: table-cell;
+      width: 1%;
+      padding: 0 24px;
+      border-left: 1px solid var(--white-two);
+    }
+
+  }
+
+  .tree-container {
+    width: 100%;
+    position: relative;
+    padding-left: 16px;
+
+    .items {
+      list-style: none;
+      padding-left: 24px;
+      margin: 0;
+    }
+
+    .node-header {
+      line-height: 36px;
+      display: flex;
+
+      .node {
+        flex-grow: 1;
+        position: relative; // this is required to make full-width selection working
+        min-width: 0; // this makes overflow-text working for flex
+        display: flex;
+
+        font-weight: 300;
+        letter-spacing: 0.6px;
+        color: var(--slate-grey);
+
+        &:hover {
+          color: var(--black);
+        }
+
+        .toggler {
+          cursor: pointer;
+          padding-right: 12px;
+          font-size: 8px;
+        }
+
+        .title {
+          cursor: pointer;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          flex-grow: 1;
+          .disable-popover{
+            opacity: 0.5;
+          }
+        }
+        .title.draggable{
+          cursor: move;
+        }
+        .status-icon{
+          line-height: 3.8rem;
+          position: absolute;
+          left: 0.5rem;
+        }
+        .status-icon.composite-template{
+          line-height: 3.4rem;
+          font-size: 1.6rem;
+        }
+      }
+
+      .options {
+        position: relative; // this is required to make full-width selection working
+        font-size: 12px;
+        padding-right: 24px;
+        visibility: hidden;
+
+        .btn-icon {
+          min-width: inherit;
+          padding: 0;
+          color: var(--cool-grey);
+          &:hover {
+            color: var(--black);
+          }
+          i {
+            top: 0;
+            font-size: 12px;
+            padding: 0;
+          }
+        }
+      }
+      .options.show{
+        visibility: visible;
+      }
+
+      &:hover, &.active {
+        .options {
+          visibility: visible;
+        }
+      }
+
+      .selection {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 36px;
+      }
+
+      &.active {
+        .selection {
+          border-left: 6px solid  var(--state-green);
+          background-color: var(--white);
+        }
+      }
+    }
+  }
+
+  .custom-checkbox {
+    [type="checkbox"] {
+      position: absolute;
+      left: -9999px;
+    }
+    [type="checkbox"] + label {
+      position: relative;
+      padding-left: 22px;
+      padding-right: 6px;
+      cursor: pointer;
+      margin: 0;
+      display: inline;
+    }
+    [type="checkbox"] + label:before {
+      content: '\e996';
+      position: absolute;
+      font: 16px Cisco-icons;
+      left: 0;
+      top: 0;
+      color: var(--slate-grey);
+    }
+    [type="checkbox"]:checked + label:before {
+      content: '\e995';
+      color: var(--cerulean);
+    }
+    [type="checkbox"]:indeterminate + label:before {
+      content: '\e99c';
+      color: var(--cerulean);
+    }
+    [type="checkbox"]:disabled + label:before {
+      content: '\e996';
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
